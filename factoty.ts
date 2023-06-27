@@ -56,7 +56,7 @@ app.delete('/factory/:id', function (req, res) {
     res.json("Producto eliminado");
 });
 
-interface Supplier {
+ interface Supplier {
     id: number;
     nameS: string;
     email: string;
@@ -82,12 +82,18 @@ app.get('/supplier/:id',function (req, res) {
     res.json(send);
 });
 
-app.post('/supplier/:id', function (req, res) {
+app.post('/supplier', function (req, res) {
     const body = req.body;
     supplier.push(body);
     res.json(`Bienvenid@ eres un nuevo comprador ${body.nameS}`);
 });
 
+app.delete('/supplier/:id', function (req, res) {
+    const id = parseInt(req.params.id);
+    const send = supplier.filter(item => item.id !== id);
+    supplier = send;
+    res.json('Vendodore eliminado');
+})
 
 
 app.listen(PORT, function () {
